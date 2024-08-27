@@ -1,0 +1,87 @@
+'use client'
+
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+
+const Card = () => {
+  const [blogData, setBlogData] = useState(null);
+
+  useEffect(() => {
+    fetch('https://a2sv-backend.onrender.com/api/blogs')
+      .then((response) => response.json())
+      .then((data) => setBlogData(data[0])) // Assuming you want the first blog
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+  if (!blogData) {
+    return <div>Loading...</div>; // Display a loading state while fetching
+  }
+
+  return (
+    <div className="w-[900px] h-[270px] border border-orange-400 rounded-lg p-4">
+      <div className="flex h-full">
+        {/* The left side */}
+        <div className="w-[65%] h-full flex flex-col justify-between">
+          {/* First section - Profile */}
+          <div className="flex mb-2">
+            <div className="w-14 h-14 border border-red-400 bg-black rounded-full overflow-hidden mr-4">
+              <Image
+                src={blogData.author?.image || '/default-profile.png'} // Use a default image if author image is missing
+                alt={blogData.author?.name || 'Author'}
+                width={56}
+                height={56}
+                className="object-cover"
+              />
+            </div>
+
+            <div>
+              <p className="font-montserrat text-[16.43px] font-semibold leading-[24.43px] text-left">
+                {blogData.author?.name || 'Anonymous'}
+              </p>
+              <p className="text-[16px] text-gray-500">
+                Software Engineer • {new Date(blogData.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+          </div>
+
+          {/* Second section - Titles */}
+          <div className="mb-1">
+            <p className="font-montserrat text-[22.21px] font-[800] leading-[34.21px] text-left">
+              {blogData.title}
+            </p>
+          </div>
+
+          {/* Third section - Description */}
+          <div className="font-montserrat text-[14.43px] font-light leading-[20px] text-left text-gray-700 mb-4">
+            {blogData.description}
+          </div>
+
+          {/* Fourth section - Buttons */}
+          <div className="flex items-center space-x-2">
+            {blogData.tags.map((tag, index) => (
+              <button
+                key={index}
+                className="px-4 py-1 bg-gray-100 rounded-full text-[14px] border border-gray-300"
+              >
+                <p className="text-gray-400">{tag}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* The right side with the image */}
+        <div className="w-[35%] flex justify-end items-center">
+          <Image
+            src={blogData.image}
+            alt={blogData.title}
+            width={150}
+            height={150}
+            className="object-cover rounded-lg"
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Card;
