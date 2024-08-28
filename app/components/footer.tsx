@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <div>
       {/* The main containing the footer */}
-      <div className="w-full h-[400px] mt-4 p-4 border border-amber-600 rounded-lg">
+      <div className="w-full h-[400px] mt-4 p-4 border border-none rounded-lg">
         {/* For the inner box */}
-        <div className="m-4 gap-0 border w-[1200px] h-[350px] border-green-500 rounded-lg flex flex-col">
+        <div className="m-4 gap-0 border w-[1200px] h-[350px] border-none rounded-lg flex flex-col">
           {/* The above ones */}
           <div className="flex flex-grow">
             {/* The image */}

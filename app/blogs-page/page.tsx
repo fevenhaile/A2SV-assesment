@@ -2,15 +2,17 @@ import React from 'react';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import Card from '../components/card';
+import Link from 'next/link';
 
 const Blogs = () => {
   return (
+    <Link href={`/description-page/`}>
     <div>
       <div className='h-[4%] w-full'>
         <Header />
       </div>
 
-      <div className='w-full border border-green-400 py-4 px-8'>
+      <div className='w-full border border-none py-4 px-8'>
         <div className='flex items-center justify-between'>
           {/* Blogs title */}
           <p className='text-[24px] font-bold'>Blogs</p>
@@ -39,6 +41,7 @@ const Blogs = () => {
         <Footer />
       </div>
     </div>
+    </Link>
   );
 };
 

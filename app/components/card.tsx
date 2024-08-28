@@ -1,24 +1,31 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 
 const Card = () => {
-  const [blogData, setBlogData] = useState(null);
-
-  useEffect(() => {
-    fetch('https://a2sv-backend.onrender.com/api/blogs')
-      .then((response) => response.json())
-      .then((data) => setBlogData(data[0])) // Assuming you want the first blog
-      .catch((error) => console.error('Error fetching data:', error));
-  }, []);
-
-  if (!blogData) {
-    return <div>Loading...</div>; // Display a loading state while fetching
-  }
+  // Example blog data
+  const blogData = {
+    "_id": "64dfe77d50961c55ce93e7e0",
+    "image": "https://res.cloudinary.com/djtkzulun/image/upload/v1692395388/A2sv/vmjzxwgp3mdvtwn2tlrw.jpg",
+    "title": "Mastering the Art of Code Refactoring",
+    "description": "Code refactoring is an essential practice in software development that often separates novice programmers from experienced engineers. Refactoring isn't just about tidying up your code; it's about improving its structure, readability, and maintainability. Let's delve into the key aspects of mastering the art of code refactoring.",
+    "author": null,
+    "isPending": true,
+    "tags": [
+      "Programming",
+      "Code"
+    ],
+    "likes": 0,
+    "relatedBlogs": [],
+    "skills": [],
+    "createdAt": "2023-08-18T21:49:49.752Z",
+    "updatedAt": "2023-08-18T21:49:49.752Z",
+    "__v": 0
+  };
 
   return (
-    <div className="w-[900px] h-[270px] border border-orange-400 rounded-lg p-4">
+    <div className="w-[900px] h-[270px] border border-none rounded-lg p-4">
       <div className="flex h-full">
         {/* The left side */}
         <div className="w-[65%] h-full flex flex-col justify-between">
